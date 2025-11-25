@@ -35,12 +35,16 @@ export default function HomeAluno({ navigation }: any) {
           <Text style={styles.cardText}>Presença</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity 
+          style={styles.card}
+          onPress={() => navigation.navigate('Calendario')}
+        >
           <FontAwesome name="calendar" size={32} color="#2563ff" />
           <Text style={styles.cardText}>Calendário</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity style={styles.card}
+        onPress={() => navigation.navigate('Colegas')}>
           <FontAwesome name="users" size={32} color="#2563ff" />
           <Text style={styles.cardText}>Colegas da Turma</Text>
         </TouchableOpacity>
@@ -75,14 +79,14 @@ const styles = StyleSheet.create({
   fundoTopo: {
     position: 'absolute',
     width: '100%',
-    height: 10, // altura igual à área verde do print
+    height: 180, // altura igual à área verde do print
     top: 0,
     left: 0,
     zIndex: -1,
   },
 
   menuContainer: {
-    marginTop: 130, // faz os cards ficarem abaixo da curva verde
+    marginTop: 60, // faz os cards ficarem abaixo da curva verde
     paddingHorizontal: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',

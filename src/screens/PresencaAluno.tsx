@@ -7,28 +7,27 @@ export default function PresencaAluno({ navigation }: any) {
   const disciplinas = [
     {
       id: '1',
-      instituicao: 'Faculdade Católica Imaculada Conceição do Recife - FICR',
-      nome: 'Redes de Computadores (Cloud Computing)',
+      instituicao: 'Escola Técnica Estadual Professor Lucilo Ávila Pessoa',
+      nome: 'História',
       faltas: 0
     },
     {
       id: '2',
-      instituicao: 'Faculdade Católica Imaculada Conceição do Recife - FICR',
-      nome: 'Banco de Dados II',
+      instituicao: 'Escola Técnica Estadual Professor Lucilo Ávila Pessoa',
+      nome: 'Matemática',
       faltas: 2
     },
     {
       id: '3',
-      instituicao: 'Faculdade Católica Imaculada Conceição do Recife - FICR',
-      nome: 'Engenharia de Software',
+      instituicao: 'Escola Técnica Estadual Professor Lucilo Ávila Pessoa',
+      nome: 'Geografia',
       faltas: 1
     }
   ];
 
   return (
     <View style={styles.container}>
-      
-      <Text style={styles.title}>Minhas Disciplinas</Text>
+
       <Text style={styles.subtitle}>Consulte seu histórico de presença</Text>
 
       <FlatList
@@ -36,27 +35,34 @@ export default function PresencaAluno({ navigation }: any) {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            
-            <Text style={styles.instituicao}>{item.instituicao}</Text>
 
-            <Text style={styles.nomeDisciplina}>{item.nome}</Text>
+            {/* BARRA AZUL NO COMEÇO DO CARD */}
+            <View style={styles.barra} />
 
-            <View style={styles.infoLinha}>
-              <Text style={styles.faltas}>Faltas: {item.faltas}</Text>
+            {/* CONTEÚDO DO CARD */}
+            <View style={styles.cardConteudo}>
+              <Text style={styles.instituicao}>{item.instituicao}</Text>
 
-              <TouchableOpacity
-                style={styles.botao}
-                onPress={() => navigation.navigate('HistoricoFaltas', { disciplina: item })}
-              >
-                <Text style={styles.textoBotao}>Ver faltas</Text>
-                <FontAwesome name="chevron-right" size={14} color="#2563ff" />
-              </TouchableOpacity>
+              <Text style={styles.nomeDisciplina}>{item.nome}</Text>
+
+              <View style={styles.infoLinha}>
+                <Text style={styles.faltas}>Faltas: {item.faltas}</Text>
+
+                <TouchableOpacity
+                  style={styles.botao}
+                  onPress={() =>
+                    navigation.navigate('HistoricoFaltas', { disciplina: item })
+                  }
+                >
+                  <Text style={styles.textoBotao}>Ver faltas</Text>
+                  <FontAwesome name="chevron-right" size={14} color="#2563ff" />
+                </TouchableOpacity>
+              </View>
             </View>
 
           </View>
         )}
       />
-
     </View>
   );
 }
@@ -68,25 +74,37 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingHorizontal: 20
   },
-  title: {
-    fontSize: 26,
-    fontWeight: '700',
-    color: '#1f1f1f'
-  },
+
   subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 4,
+    fontSize: 23,
+    fontWeight: '700',
+    color: '#1f1f1f',
+    marginTop: -12,
     marginBottom: 20
   },
 
+  /* CARD COMPLETO */
   card: {
     width: '100%',
     backgroundColor: '#f2f2f2',
     borderRadius: 14,
-    padding: 16,
     marginBottom: 16,
-    elevation: 2
+    elevation: 3,
+    flexDirection: 'row',
+    overflow: 'hidden', // ESSENCIAL PARA A BARRA GRUDAR NA BORDA
+  },
+
+  /* BARRA AZUL NO COMEÇO DO CARD */
+  barra: {
+    width: 8,
+    backgroundColor: '#1E90FF',
+    height: '100%',
+  },
+
+  /* CONTEÚDO DO CARD (agora tem padding próprio, não no card) */
+  cardConteudo: {
+    flex: 1,
+    padding: 16,
   },
 
   instituicao: {

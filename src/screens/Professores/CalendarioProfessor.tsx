@@ -20,21 +20,78 @@ export default function CalendarioProfessor() {
   ];
 
   const eventos = [
-    { dia: 4, mes: 2, diaSemana: 'SEG', titulo: 'Feriado Carnaval', subtitulo: 'Recesso Escolar' },
-    { dia: 5, mes: 2, diaSemana: 'TER', titulo: 'Feriado Carnaval', subtitulo: 'Recesso Escolar' },
-    { dia: 6, mes: 2, diaSemana: 'QUA', titulo: 'Feriado Cinzas', subtitulo: 'Recesso Escolar' },
-    { dia: 19, mes: 2, diaSemana: 'TER', titulo: 'Feriado São José', subtitulo: 'Recesso Escolar' },
-    { dia: 25, mes: 2, diaSemana: 'SEG', titulo: 'Feriado Carta Magma Ceará', subtitulo: 'Recesso Escolar' },
+    // ====== JANEIRO ======
+    { dia: 30, mes: 0, diaSemana: 'QUI', titulo: 'Planejamento Escolar', subtitulo: 'Formação Continuada' },
+    { dia: 31, mes: 0, diaSemana: 'SEX', titulo: 'Planejamento Escolar', subtitulo: 'Organização Pedagógica' },
+  
+    // ====== FEVEREIRO ======
+    { dia: 3, mes: 1, diaSemana: 'SEG', titulo: 'Início do Ano Letivo', subtitulo: 'Acolhimento dos estudantes' },
+    { dia: 24, mes: 1, diaSemana: 'SEG', titulo: 'Carnaval', subtitulo: 'Recesso Escolar' },
+    { dia: 25, mes: 1, diaSemana: 'TER', titulo: 'Carnaval', subtitulo: 'Recesso Escolar' },
+    { dia: 26, mes: 1, diaSemana: 'QUA', titulo: 'Quarta-feira de Cinzas', subtitulo: 'Recesso Escolar' },
+  
+    // ====== MARÇO ======
+    { dia: 6, mes: 2, diaSemana: 'QUI', titulo: 'Data Magna de Pernambuco', subtitulo: 'Feriado Estadual' },
+    { dia: 7, mes: 2, diaSemana: 'SEX', titulo: 'Planejamento Escolar', subtitulo: 'Reorganização Pedagógica' },
+    { dia: 8, mes: 2, diaSemana: 'SAB', titulo: 'Dia Internacional da Mulher', subtitulo: 'Atividade Comemorativa' },
+    
+    // Semana das Mulheres (10 a 14)
+    { dia: 10, mes: 2, diaSemana: 'SEG', titulo: 'Semana da Mulher', subtitulo: 'Valorização das Mulheres' },
+    { dia: 11, mes: 2, diaSemana: 'TER', titulo: 'Semana da Mulher', subtitulo: 'Ações Temáticas' },
+    { dia: 12, mes: 2, diaSemana: 'QUA', titulo: 'Semana da Mulher', subtitulo: 'Ações Temáticas' },
+    { dia: 13, mes: 2, diaSemana: 'QUI', titulo: 'Semana da Mulher', subtitulo: 'Ações Temáticas' },
+    { dia: 14, mes: 2, diaSemana: 'SEX', titulo: 'Semana da Mulher', subtitulo: 'Encerramento das Atividades' },
+  
+    { dia: 28, mes: 2, diaSemana: 'SEX', titulo: 'Dia da Escola', subtitulo: 'Atividade Especial' },
+  
+    // ====== ABRIL ======
     { dia: 18, mes: 3, diaSemana: 'SEX', titulo: 'Paixão de Cristo', subtitulo: 'Feriado Nacional' },
-    { dia: 21, mes: 3, diaSemana: 'DOM', titulo: 'Tiradentes', subtitulo: 'Feriado Nacional' },
+    { dia: 21, mes: 3, diaSemana: 'SEG', titulo: 'Tiradentes', subtitulo: 'Feriado Nacional' },
+    { dia: 22, mes: 3, diaSemana: 'TER', titulo: 'Planejamento Docente', subtitulo: 'Reorganização Pedagógica' },
+  
+    // ====== MAIO ======
     { dia: 1, mes: 4, diaSemana: 'QUI', titulo: 'Dia do Trabalho', subtitulo: 'Feriado Nacional' },
+    { dia: 15, mes: 4, diaSemana: 'QUI', titulo: 'Dia da Família na Escola', subtitulo: 'Evento Escolar' },
+  
+    // ====== JUNHO ======
     { dia: 19, mes: 5, diaSemana: 'QUI', titulo: 'Corpus Christi', subtitulo: 'Feriado Nacional' },
+    { dia: 24, mes: 5, diaSemana: 'TER', titulo: 'Dia de São João', subtitulo: 'Feriado Municipal' },
+  
+    // ====== JULHO ======
+    // Recesso (14 a 25)
+    { dia: 14, mes: 6, diaSemana: 'SEG', titulo: 'Recesso Escolar', subtitulo: 'Pausa do Meio do Ano' },
+    { dia: 25, mes: 6, diaSemana: 'SEX', titulo: 'Final do Recesso', subtitulo: 'Retorno das Atividades' },
+  
+    // ====== AGOSTO ======
+    { dia: 30, mes: 7, diaSemana: 'SAB', titulo: 'Feira de Ciências', subtitulo: 'Apresentações e Projetos' },
+  
+    // ====== SETEMBRO ======
     { dia: 7, mes: 8, diaSemana: 'DOM', titulo: 'Independência do Brasil', subtitulo: 'Feriado Nacional' },
+    
+    // Simulado ETE (16 a 19)
+    { dia: 16, mes: 8, diaSemana: 'TER', titulo: 'Simulado ETE', subtitulo: 'Avaliação Institucional' },
+    { dia: 17, mes: 8, diaSemana: 'QUA', titulo: 'Simulado ETE', subtitulo: 'Avaliação Institucional' },
+    { dia: 18, mes: 8, diaSemana: 'QUI', titulo: 'Simulado ETE', subtitulo: 'Avaliação Institucional' },
+    { dia: 19, mes: 8, diaSemana: 'SEX', titulo: 'Simulado ETE', subtitulo: 'Encerramento' },
+  
+    // ====== OUTUBRO ======
     { dia: 12, mes: 9, diaSemana: 'DOM', titulo: 'Nossa Senhora Aparecida', subtitulo: 'Feriado Nacional' },
-    { dia: 2, mes: 10, diaSemana: 'DOM', titulo: 'Finados', subtitulo: 'Feriado Nacional' },
-    { dia: 15, mes: 10, diaSemana: 'SAB', titulo: 'Proclamação da República', subtitulo: 'Feriado Nacional' },
-    { dia: 25, mes: 11, diaSemana: 'QUA', titulo: 'Natal', subtitulo: 'Feriado Nacional' },
+    { dia: 15, mes: 9, diaSemana: 'QUA', titulo: 'Dia do Professor', subtitulo: 'Data Comemorativa' },
+  
+    // ====== NOVEMBRO ======
+    { dia: 2, mes: 10, diaSemana: 'SAB', titulo: 'Finados', subtitulo: 'Feriado Nacional' },
+    { dia: 20, mes: 10, diaSemana: 'QUI', titulo: 'Dia da Consciência Negra', subtitulo: 'Feriado Nacional' },
+    { dia: 25, mes: 10, diaSemana: 'TER', titulo: 'Jogos Internos', subtitulo: 'Início do Torneio' },
+    { dia: 26, mes: 10, diaSemana: 'QUA', titulo: 'Jogos Internos', subtitulo: 'Competições' },
+    { dia: 27, mes: 10, diaSemana: 'QUI', titulo: 'Jogos Internos', subtitulo: 'Competições' },
+    { dia: 28, mes: 10, diaSemana: 'SEX', titulo: 'Jogos Internos', subtitulo: 'Encerramento' },
+  
+    // ====== DEZEMBRO ======
+    { dia: 25, mes: 11, diaSemana: 'QUI', titulo: 'Natal', subtitulo: 'Feriado Nacional' },
+    { dia: 31, mes: 11, diaSemana: 'QUI', titulo: 'Encerramento do Ano Letivo', subtitulo: 'Finalização das Atividades' },
   ];
+  
+  
 
   const eventosFiltrados = eventos.filter(e => e.mes === mesSelecionado);
 

@@ -18,7 +18,6 @@ export default function CadastroScreen({ navigation }: any) {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Topo com gradiente e logo */}
       <View style={styles.topContainer}>
         <FundoAnimado />
         <Image
@@ -28,7 +27,6 @@ export default function CadastroScreen({ navigation }: any) {
         />
       </View>
 
-      {/* Card principal */}
       <View style={styles.card}>
         <View style={styles.toplogo}>
           <Image
@@ -91,12 +89,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     
-    marginTop: -40,          // puxa o card para cima igual na tela de login
+    marginTop: -40,         
     alignSelf: 'center',
     borderRadius: 18,
     paddingVertical: 30,
    
-             // sombra no Android
    
   },
   

@@ -1,9 +1,11 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, FlatList, TextInput } from "react-native";
 
 export default function AlunosDaTurmaProfessor({ route }: any) {
 
   const turmaId = route?.params?.turmaId;
+
+  const [pesquisa, setPesquisa] = useState("");
 
   const alunosPorTurma: any = {
     "1": [
@@ -23,12 +25,26 @@ export default function AlunosDaTurmaProfessor({ route }: any) {
 
   const alunos = alunosPorTurma[turmaId] || [];
 
+  // 🔍 Filtra alunos conforme digitação
+  const alunosFiltrados = alunos.filter((aluno: any) =>
+    aluno.nome.toLowerCase().includes(pesquisa.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Alunos da Turma</Text>
 
+      {/* 🔍 Campo de busca */}
+      <TextInput
+        style={styles.campoPesquisa}
+        placeholder="Pesquisar aluno..."
+        placeholderTextColor="#999"
+        value={pesquisa}
+        onChangeText={setPesquisa}
+      />
+
       <FlatList
-        data={alunos}
+        data={alunosFiltrados}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.card}>
@@ -37,6 +53,10 @@ export default function AlunosDaTurmaProfessor({ route }: any) {
           </View>
         )}
       />
+
+      {alunosFiltrados.length === 0 && (
+        <Text style={styles.nenhum}>Nenhum aluno encontrado</Text>
+      )}
     </View>
   );
 }
@@ -53,6 +73,16 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     marginBottom: 20,
     textAlign: "center",
+  },
+
+  campoPesquisa: {
+    backgroundColor: "#f1f1f1",
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 18,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
 
   card: {
@@ -74,5 +104,12 @@ const styles = StyleSheet.create({
   nome: {
     fontSize: 18,
     fontWeight: "600",
+  },
+
+  nenhum: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 16,
+    color: "#777",
   },
 });

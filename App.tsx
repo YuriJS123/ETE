@@ -2,18 +2,28 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import HistoricoFaltas from './src/screens/HistoricoFaltas';
+import HistoricoFaltas from './src/screens/Alunos/HistoricoFaltasAlunos';
 import CadastroScreen from './src/screens/CadastroScreen';
 import LoginScreen from './src/screens/LoginScreen';
-import HomeAluno from './src/screens/HomeAluno';
-import HomeProfessor from './src/screens/HomeProfessor';
-import PresencaAluno from './src/screens/PresencaAluno';
-import BoletimAluno from './src/screens/BoletimAluno';
-import Calendario from './src/screens/Calendario';
-import Colegas from './src/screens/Colegas';
+import HomeAluno from './src/screens/Alunos/HomeAluno';
+import HomeProfessor from './src/screens/Professores/HomeProfessor';
+import PresencaAluno from './src/screens/Alunos/PresencaAluno';
+import BoletimAluno from './src/screens/Alunos/BoletimAluno';
+import CalendarioAluno from './src/screens/Alunos/CalendarioAluno';
+import Colegas from './src/screens/Alunos/ColegasAlunos';
+import AulasDoDiaAlunos from './src/screens/Alunos/AulasDoDiaAlunos';
+import PresencaProfessor from './src/screens/Professores/PresencaProfessor';
+import AvisosDaEscolaAlunos from './src/screens/Alunos/AvisosDaEscolaAlunos';
+import ChamadaDisciplina from './src/screens/Professores/ChamadaDisciplina';
+import CalendarioProfessor from './src/screens/Professores/CalendarioProfessor';
+import AlunosDaTurmaProfessor from './src/screens/Professores/AlunosDaTurmaProfessor';
+import TurmasProfessor from './src/screens/Professores/TurmasProfessor';
+import AvisosDaEscolaProfessor from './src/screens/Professores/AvisosDaEscolaProfessor';
+import AulasDoDiaProfessor from './src/screens/Professores/AulasDoDiaProfessor'
+
+
 const Stack = createNativeStackNavigator();
 
-// Função para criar um header com LinearGradient
 const gradientHeader = (title: string): NativeStackNavigationOptions => ({
   headerTintColor: '#fff',
   headerTitle: title,
@@ -37,39 +47,88 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        {/* Login */}
         <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
- <Stack.Screen
-          name="Calendario"
-          component={Calendario}
+
+        <Stack.Screen
+          name="CalendarioAluno"
+          component={CalendarioAluno}
           options={gradientHeader('Calendário')}
         />
-        {/* Home Aluno */}
+<Stack.Screen
+  name="TurmasProfessor"
+  component={TurmasProfessor}
+  options={gradientHeader("Turmas")}
+/>
+
+<Stack.Screen
+  name="AlunosDaTurmaProfessor"
+  component={AlunosDaTurmaProfessor}
+  options={gradientHeader("Alunos")}
+/>
+<Stack.Screen
+  name="AulasDoDiaProfessor"
+  component={AulasDoDiaProfessor}
+  options={gradientHeader("Aulas do dia")}
+/>
+
+
+<Stack.Screen
+  name="AvisosDaEscolaProfessor"
+  component={AvisosDaEscolaProfessor}
+  options={gradientHeader("Avisos")}
+/>
+        <Stack.Screen
+          name="CalendarioProfessor"
+          component={CalendarioProfessor}
+          options={gradientHeader('Calendário')}
+        />
+
+        <Stack.Screen 
+          name="AvisosDaEscolaAlunos" 
+          component={AvisosDaEscolaAlunos}
+          options={gradientHeader('Avisos da escola')}
+        />
+
+        <Stack.Screen
+          name="AulasDoDiaAlunos"
+          component={AulasDoDiaAlunos}
+          options={gradientHeader('Aulas do dia')}
+        />
+
         <Stack.Screen
           name="HomeAluno"
           component={HomeAluno}
           options={gradientHeader('Olá, Aluno!')}
         />
 
-        {/* Home Professor */}
         <Stack.Screen
           name="HomeProfessor"
           component={HomeProfessor}
-          options={{ title: 'Início - Professor' }}
+          options={gradientHeader('Olá, Professor!')}
         />
 
-        {/* Presença Aluno */}
         <Stack.Screen
           name="PresencaAluno"
           component={PresencaAluno}
           options={gradientHeader('Minhas Disciplinas')}
         />
 
-        {/* Cadastro */}
+        <Stack.Screen
+          name="PresencaProfessor"
+          component={PresencaProfessor}
+          options={gradientHeader('Matérias')}
+        />
+
+        <Stack.Screen
+          name="ChamadaDisciplina"
+          component={ChamadaDisciplina}
+          options={gradientHeader('Chamada')}
+        />
+
         <Stack.Screen
           name="CadastroScreen"
           component={CadastroScreen}
@@ -80,19 +139,18 @@ export default function App() {
           }}
         />
 
-        {/* Boletim Aluno */}
         <Stack.Screen
           name="BoletimAluno"
           component={BoletimAluno}
           options={gradientHeader('Boletim')}
         />
-<Stack.Screen
+
+        <Stack.Screen
           name="Colegas"
           component={Colegas}
           options={gradientHeader('Colegas da Turma')}
-          
         />
-        {/* Histórico de Faltas */}
+
         <Stack.Screen
           name="HistoricoFaltas"
           component={HistoricoFaltas}

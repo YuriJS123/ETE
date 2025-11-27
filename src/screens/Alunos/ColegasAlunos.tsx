@@ -9,7 +9,10 @@ export default function Colegas() {
   const [fotoUsuario, setFotoUsuario] = useState('https://akamai.sscdn.co/letras/215x215/fotos/d/1/2/2/d1227c4db2a6b128bbb5fa63bd4d6f5c.jpg');
   const [nomeUsuario, setNomeUsuario] = useState("João Marcelo");
   const [novoNome, setNovoNome] = useState(nomeUsuario);
- 
+
+  // 🔍 NOVO: estado da pesquisa
+  const [pesquisa, setPesquisa] = useState("");
+
   const usuarioLogado = {
     id: '0',
     nome: nomeUsuario,
@@ -28,9 +31,14 @@ export default function Colegas() {
 
   const totalAlunos = outrosColegas.length + 1;
 
+  // 🔍 NOVO: filtrar alunos pela pesquisa
+  const colegasFiltrados = outrosColegas.filter((aluno) =>
+    aluno.nome.toLowerCase().includes(pesquisa.toLowerCase())
+  );
+
   const handleSelecionarFoto = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
+
     if (status !== 'granted') {
       Alert.alert('Permissão negada', 'Precisamos de permissão para acessar suas fotos.');
       return;
@@ -51,7 +59,7 @@ export default function Colegas() {
 
   const handleTirarFoto = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    
+
     if (status !== 'granted') {
       Alert.alert('Permissão negada', 'Precisamos de permissão para usar a câmera.');
       return;
@@ -71,17 +79,23 @@ export default function Colegas() {
 
   return (
     <View style={styles.container}>
-      <View >
-        
-        <Text style={styles.titulo}>3° ano Manhã - {totalAlunos} alunos</Text>
-      </View>
+      <Text style={styles.titulo}>3° ano Manhã - {totalAlunos} alunos</Text>
+
+      {/* 🔍 CAMPO DE PESQUISA */}
+      <TextInput
+        style={styles.campoPesquisa}
+        placeholder="Pesquisar aluno..."
+        placeholderTextColor="#9ca3af"
+        value={pesquisa}
+        onChangeText={setPesquisa}
+      />
 
       <ScrollView 
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-        
+        {/* CARD DO PRÓPRIO USUÁRIO */}
         <View style={styles.cardUsuario}>
           <View style={styles.badgeVoce}>
             <Text style={styles.badgeVoceText}>Você</Text>
@@ -113,13 +127,15 @@ export default function Colegas() {
           </TouchableOpacity>
         </View>
 
+        {/* SEPARADOR */}
         <View style={styles.separador}>
           <View style={styles.linhaSeparador} />
           <Text style={styles.textoSeparador}>COLEGAS</Text>
           <View style={styles.linhaSeparador} />
         </View>
 
-        {outrosColegas.map((aluno) => (
+        {/* LISTA DE COLEGAS FILTRADOS */}
+        {colegasFiltrados.map((aluno) => (
           <View key={aluno.id} style={styles.cardColega}>
             <View style={styles.fotoContainer}>
               <Image 
@@ -133,8 +149,14 @@ export default function Colegas() {
             </View>
           </View>
         ))}
+
+        {/* Caso não encontre ninguém */}
+        {colegasFiltrados.length === 0 && (
+          <Text style={styles.nenhumResultado}>Nenhum aluno encontrado.</Text>
+        )}
       </ScrollView>
 
+      {/* MODAL DE FOTO */}
       <Modal
         visible={mostrarModalFoto}
         transparent={true}
@@ -180,7 +202,7 @@ export default function Colegas() {
         </View>
       </Modal>
 
-
+      {/* MODAL DE EDIÇÃO DE NOME */}
       <Modal
         visible={mostrarModalNome}
         transparent={true}
@@ -229,10 +251,33 @@ export default function Colegas() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f5f5f5' },
 
+  titulo: { 
+    fontSize: 24,
+    textAlign: 'center', 
+    fontWeight: '700', 
+    color: '#000', 
+    marginBottom: 10, 
+    marginTop: 34 
+  },
 
+  // 🔍 Estilo da barra de pesquisa
+  campoPesquisa: {
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 12,
+    marginHorizontal: 16,
+    marginBottom: 16,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+  },
 
-  titulo: { fontSize: 24,textAlign: 'center', fontWeight: '700', color: '#000', marginBottom: 4, marginTop:34 },
-  
+  nenhumResultado: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#6b7280',
+    marginTop: 20,
+  },
 
   scrollView: { flex: 1 },
   contentContainer: { padding: 16 },

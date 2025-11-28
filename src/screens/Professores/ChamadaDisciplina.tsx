@@ -1,42 +1,53 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native';
 
-export default function ChamadaDisciplina({ route, navigation }: any) {
+type Aluno = {
+  id: string;
+  nome: string;
+  foto: string;
+  registro: string | null;
+  selecionando?: boolean;
+};
 
+export default function ChamadaDisciplina({ route }: any) {
   const { disciplina } = route.params;
 
-  const [alunos, setAlunos] = useState<
-  { id: string; nome: string; registro: string | null }[]
->([
-  { id: '1', nome: 'Ana Beatriz', registro: null },
-  { id: '2', nome: 'João Marcelo', registro: null },
-  { id: '3', nome: 'Mara Rubia', registro: null },
-  { id: '4', nome: 'Ravi Jaeguer', registro: null },
-]);
+  const [alunos, setAlunos] = useState<Aluno[]>([
+    {
+      id: '1',
+      nome: 'Ana Beatriz Ribeiro da Silva',
+      foto: 'https://media.istockphoto.com/id/512735004/pt/foto/retrato-de-uma-jovem-mulher-bonita.jpg?s=170667a&w=0&k=20&c=gKttPjE1yV_ihWLG7ph2jdDo5P6dJcnkkN9LT4Yz0aw=',
+      registro: null,
+    },
+    {
+      id: '2',
+      nome: 'João Marcelo Azevêdo dos Santos',
+      foto: 'https://img.freepik.com/fotos-gratis/retrato-de-um-homem-bonito_23-2150770967.jpg?semt=ais_hybrid&w=740&q=80',
+      registro: null,
+    },
+    {
+      id: '3',
+      nome: 'Mara Rúbia de Araújo Alves',
+      foto: 'https://i.pinimg.com/736x/5b/44/e0/5b44e0ea827f91bed4998b02cdddeb31.jpg',
+      registro: null,
+    },
+    {
+      id: '4',
+      nome: 'Ravi Jaeger Cavalvanti Cyrillo',
+      foto: 'https://static.vecteezy.com/ti/fotos-gratis/p2/25009030-bonito-jovem-homem-adolescente-moda-emocoes-luz-fundo-foto.jpg',
+      registro: null,
+    },
+  ]);
 
-
-  function registrar(id: string, tipo: 'Presente' | 'Falta') {
-    const dataHoje = new Date();
-    const dataFormatada =
-      dataHoje.getDate().toString().padStart(2, '0') +
-      '/' +
-      (dataHoje.getMonth() + 1).toString().padStart(2, '0');
-
-    setAlunos(alunos.map(a =>
-      a.id === id
-        ? { ...a, registro: `${tipo} — ${dataFormatada}` }
-        : a
-    ));
+  function atualizarAluno(id: string, dados: Partial<Aluno>) {
+    setAlunos(alunos.map((a: Aluno) => (a.id === id ? { ...a, ...dados } : a)));
   }
 
   return (
     <View style={styles.container}>
-      
+
       <Text style={styles.titulo}>{disciplina.nome}</Text>
-      <Text style={styles.subtitulo}>
-        Turma: {disciplina.turma}
-      </Text>
+      <Text style={styles.subtitulo}>Turma: {disciplina.turma}</Text>
 
       <FlatList
         data={alunos}
@@ -45,29 +56,66 @@ export default function ChamadaDisciplina({ route, navigation }: any) {
           <View style={styles.card}>
             <View style={styles.barra} />
 
+            <Image source={{ uri: item.foto }} style={styles.foto} />
+
             <View style={styles.cardConteudo}>
+              
               <Text style={styles.nomeAluno}>{item.nome}</Text>
 
-              {item.registro && (
+              {item.registro && !item.selecionando && (
                 <Text style={styles.registro}>{item.registro}</Text>
               )}
 
-              <View style={styles.botoesLinha}>
-                
-                <TouchableOpacity
-                  style={styles.botaoPresente}
-                  onPress={() => registrar(item.id, 'Presente')}
-                >
-                  <Text style={styles.botaoTextoBranco}>Presente</Text>
-                </TouchableOpacity>
+              {/* PRESENTE / FALTA */}
+              {!item.selecionando && !item.registro && (
+                <View style={styles.botoesLinha}>
+                  <TouchableOpacity
+                    style={styles.botaoPresente}
+                    onPress={() => atualizarAluno(item.id, { registro: 'Presente', selecionando: true })}
+                  >
+                    <Text style={styles.botaoTextoBranco}>Presente</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.botaoFalta}
-                  onPress={() => registrar(item.id, 'Falta')}
-                >
-                  <Text style={styles.botaoTextoFalta}>Falta</Text>
-                </TouchableOpacity>
-              </View>
+                  <TouchableOpacity
+                    style={styles.botaoFalta}
+                    onPress={() => atualizarAluno(item.id, { registro: 'Falta', selecionando: true })}
+                  >
+                    <Text style={styles.botaoTextoFalta}>Falta</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {/* ENVIAR / CANCELAR */}
+              {item.selecionando && (
+                <View style={styles.botoesLinha}>
+                  <TouchableOpacity
+                    style={styles.botaoEnviar}
+                    onPress={() => {
+                      const hoje = new Date();
+                      const data =
+                        hoje.getDate().toString().padStart(2, '0') +
+                        '/' +
+                        (hoje.getMonth() + 1).toString().padStart(2, '0');
+
+                      atualizarAluno(item.id, {
+                        registro: `${item.registro} — ${data}`,
+                        selecionando: false,
+                      });
+                    }}
+                  >
+                    <Text style={styles.botaoTextoBranco}>Enviar</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.botaoCancelar}
+                    onPress={() =>
+                      atualizarAluno(item.id, { registro: null, selecionando: false })
+                    }
+                  >
+                    <Text style={styles.botaoTextoFalta}>Cancelar</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           </View>
         )}
@@ -106,12 +154,20 @@ const styles = StyleSheet.create({
     elevation: 3,
     flexDirection: 'row',
     overflow: 'hidden',
+    alignItems: 'center'
   },
 
   barra: {
     width: 8,
     backgroundColor: '#1E90FF',
     height: '100%',
+  },
+
+  foto: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginLeft: 12,
   },
 
   cardConteudo: {
@@ -166,4 +222,22 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 14,
   },
+
+  botaoEnviar: {
+    backgroundColor: '#1E90FF',
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+
+  botaoCancelar: {
+    borderWidth: 2,
+    borderColor: '#d11a2a',
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+  },
 });
+
+export { };

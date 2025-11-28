@@ -20,7 +20,7 @@ export default function PresencaProfessor({ navigation }: any) {
       nome: 'Geografia',
       turma: '3º Ano Médio'
     }
-  ];
+  ]; 
 
   return (
     <View style={styles.container}>

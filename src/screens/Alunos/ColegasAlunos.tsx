@@ -6,8 +6,8 @@ import * as ImagePicker from 'expo-image-picker';
 export default function Colegas() {
   const [mostrarModalFoto, setMostrarModalFoto] = useState(false);
   const [mostrarModalNome, setMostrarModalNome] = useState(false);
-  const [fotoUsuario, setFotoUsuario] = useState('https://akamai.sscdn.co/letras/215x215/fotos/d/1/2/2/d1227c4db2a6b128bbb5fa63bd4d6f5c.jpg');
-  const [nomeUsuario, setNomeUsuario] = useState("João Marcelo");
+  const [fotoUsuario, setFotoUsuario] = useState('https://img.freepik.com/fotos-gratis/retrato-de-um-homem-bonito_23-2150770967.jpg?semt=ais_hybrid&w=740&q=80');
+  const [nomeUsuario, setNomeUsuario] = useState("João Marcelo Azevêdo dos Santos");
   const [novoNome, setNovoNome] = useState(nomeUsuario);
 
   // 🔍 NOVO: estado da pesquisa
@@ -21,12 +21,12 @@ export default function Colegas() {
   };
 
   const outrosColegas = [
-    { id: '1', nome: 'Mara', foto: 'https://static.vecteezy.com/ti/fotos-gratis/t2/42730459-leao-perigo-animal-animais-selvagens-natureza-floresta-foto.jpg' },
-    { id: '2', nome: 'Ravi', foto: 'https://forbes.com.br/wp-content/uploads/2023/02/Life_Fotos-incriveis-natureza-CUPOTY.jpg' },
-    { id: '3', nome: 'Rafael', foto: 'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/Neymar-Santos-foto.jpg?w=419&h=283&crop=0' },
-    { id: '4', nome: 'Yuri', foto: 'https://static.poder360.com.br/2023/02/Lula_-_foto_oficial_-_05_jan_2007_cropped_3-scaled.jpg' },
-    { id: '5', nome: 'Filipe', foto: 'https://s2-g1.glbimg.com/k_em1cSFq3uQ6hQQCnBhAmpRykE=/0x0:3333x1874/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/Q/2/2cWEPlQVCyQYraw8BkPQ/imagem-cortada-23-.jpg' },
-    { id: '6', nome: 'Ana', foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4w64TJB9QbjhTw18k8xGkkfZsvtGOkbeucQ&s' },
+    { id: '1', nome: 'Mara Rúbia de Araújo Alves', foto: 'https://i.pinimg.com/736x/5b/44/e0/5b44e0ea827f91bed4998b02cdddeb31.jpg' },
+    { id: '2', nome: 'Ravi Jaeger Cavalvanti Cyrillo', foto: 'https://static.vecteezy.com/ti/fotos-gratis/p2/25009030-bonito-jovem-homem-adolescente-moda-emocoes-luz-fundo-foto.jpg' },
+    { id: '3', nome: 'Rafael Andrade Dutra dos Santos', foto: 'https://i.pinimg.com/564x/9b/86/42/9b864241d203df27e4d822780be8872f.jpg' },
+    { id: '4', nome: 'Yuri José Ferreira dos Santos', foto: 'https://ai-previews.123rf.com/ai-txt2img/600nwm/d0097d99-6adc-4ea9-8e9b-bc084646fc1e.jpg' },
+    { id: '5', nome: 'Filipe Filipe Carvalho Pereira', foto: 'https://s2-oglobo.glbimg.com/u6mPJO7B25EB45RagwuAHdoD-wk=/0x0:464x655/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/z/l/LLrKduT2KeZ4kX4VAmkw/whatsapp-image-2023-10-20-at-16.05.52.jpeg' },
+    { id: '6', nome: 'Ana Beatriz Ribeiro da Silva', foto: 'https://media.istockphoto.com/id/512735004/pt/foto/retrato-de-uma-jovem-mulher-bonita.jpg?s=170667a&w=0&k=20&c=gKttPjE1yV_ihWLG7ph2jdDo5P6dJcnkkN9LT4Yz0aw=' },
   ];
 
   const totalAlunos = outrosColegas.length + 1;
@@ -79,7 +79,7 @@ export default function Colegas() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>3° ano Manhã - {totalAlunos} alunos</Text>
+      <Text style={styles.titulo}>2° ano Médio - {totalAlunos} alunos</Text>
 
       {/* 🔍 CAMPO DE PESQUISA */}
       <TextInput

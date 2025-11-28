@@ -20,8 +20,8 @@ import AlunosDaTurmaProfessor from './src/screens/Professores/AlunosDaTurmaProfe
 import TurmasProfessor from './src/screens/Professores/TurmasProfessor';
 import AvisosDaEscolaProfessor from './src/screens/Professores/AvisosDaEscolaProfessor';
 import AulasDoDiaProfessor from './src/screens/Professores/AulasDoDiaProfessor'
-
-
+import ChamadaRealizadaProfessor from './src/screens/Professores/Chamadarealizadaprofessor';
+import DetalhesChamada from './src/screens/Professores/DetalhesChamada'
 const Stack = createNativeStackNavigator();
 
 const gradientHeader = (title: string): NativeStackNavigationOptions => ({
@@ -92,6 +92,11 @@ export default function App() {
           component={AvisosDaEscolaAlunos}
           options={gradientHeader('Avisos da escola')}
         />
+        <Stack.Screen 
+          name="DetalhesChamada" 
+          component={DetalhesChamada}
+          options={gradientHeader('Chamada')}
+        />
 
         <Stack.Screen
           name="AulasDoDiaAlunos"
@@ -104,6 +109,12 @@ export default function App() {
           component={HomeAluno}
           options={gradientHeader('Olá, Aluno!')}
         />
+        <Stack.Screen
+  name="ChamadaRealizadaProfessor"
+  component={ChamadaRealizadaProfessor}
+  options={gradientHeader('Chamada realizada')}
+/>
+
 
         <Stack.Screen
           name="HomeProfessor"

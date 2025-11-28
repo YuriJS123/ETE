@@ -5,8 +5,6 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  TextInput,
-  Modal,
   Alert,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -25,59 +23,13 @@ export default function AvisosDaEscolaProfessor() {
       data: '28/11/2025',
       descricao: 'Os boletins estarão disponíveis no portal e presencialmente.',
     },
+    {
+      id: '3',
+      titulo: 'Semana Cultural',
+      data: '02/12/2025',
+      descricao: 'Semana cultural com apresentações, oficinas e feira de artes.',
+    },
   ]);
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [editandoId, setEditandoId] = useState<string | null>(null);
-
-  const [titulo, setTitulo] = useState('');
-  const [data, setData] = useState('');
-  const [descricao, setDescricao] = useState('');
-
-  const novoAviso = () => {
-    setEditandoId(null);
-    setTitulo('');
-    setData('');
-    setDescricao('');
-    setModalVisible(true);
-  };
-
-  const editarAviso = (aviso: any) => {
-    setEditandoId(aviso.id);
-    setTitulo(aviso.titulo);
-    setData(aviso.data);
-    setDescricao(aviso.descricao);
-    setModalVisible(true);
-  };
-
-  const salvarAviso = () => {
-    if (!titulo || !data || !descricao) {
-      Alert.alert('Preencha todos os campos!');
-      return;
-    }
-
-    if (editandoId) {
-      setAvisos((prev) =>
-        prev.map((item) =>
-          item.id === editandoId
-            ? { ...item, titulo, data, descricao }
-            : item
-        )
-      );
-    } else {
-      setAvisos((prev) => [
-        ...prev,
-        {
-          id: String(Date.now()),
-          titulo,
-          data,
-          descricao,
-        },
-      ]);
-    }
-
-    setModalVisible(false);
-  };
 
   const excluirAviso = (id: string) => {
     Alert.alert(
@@ -97,10 +49,6 @@ export default function AvisosDaEscolaProfessor() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.botaoNovo} onPress={novoAviso}>
-        <FontAwesome name="plus" size={18} color="white" />
-        <Text style={styles.botaoTexto}>Criar Aviso</Text>
-      </TouchableOpacity>
 
       <FlatList
         data={avisos}
@@ -111,67 +59,16 @@ export default function AvisosDaEscolaProfessor() {
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={styles.titulo}>{item.titulo}</Text>
 
-              <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity onPress={() => editarAviso(item)}>
-                  <FontAwesome name="edit" size={22} color="#2563ff" style={{ marginRight: 10 }} />
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => excluirAviso(item.id)}>
-                  <FontAwesome name="trash" size={22} color="red" />
-                </TouchableOpacity>
-              </View>
+              
             </View>
 
             <Text style={styles.data}>{item.data}</Text>
             <Text style={styles.descricao}>{item.descricao}</Text>
+
+           
           </View>
         )}
       />
-
-      <Modal visible={modalVisible} animationType="slide" transparent>
-        <View style={styles.modalBg}>
-          <View style={styles.modalBox}>
-            <Text style={styles.modalTitulo}>
-              {editandoId ? 'Editar Aviso' : 'Novo Aviso'}
-            </Text>
-
-            <TextInput
-              placeholder="Título"
-              style={styles.input}
-              value={titulo}
-              onChangeText={setTitulo}
-            />
-
-            <TextInput
-              placeholder="Data (ex: 25/11/2025)"
-              style={styles.input}
-              value={data}
-              onChangeText={setData}
-            />
-
-            <TextInput
-              placeholder="Descrição"
-              style={[styles.input, { height: 100 }]}
-              multiline
-              value={descricao}
-              onChangeText={setDescricao}
-            />
-
-            <View style={styles.modalBotoes}>
-              <TouchableOpacity
-                style={[styles.btn, { backgroundColor: '#ccc' }]}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text>Cancelar</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.btn} onPress={salvarAviso}>
-                <Text style={{ color: "white" }}>Salvar</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
 
     </View>
   );
@@ -183,22 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 60,
     paddingHorizontal: 20,
-  },
-
-  botaoNovo: {
-    backgroundColor: "#2563ff",
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-
-  botaoTexto: {
-    color: "white",
-    marginLeft: 8,
-    fontSize: 16,
-    fontWeight: "bold",
   },
 
   card: {
@@ -229,43 +110,10 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 
-  modalBg: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    paddingHorizontal: 30,
-  },
-
-  modalBox: {
-    backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 20,
-  },
-
-  modalTitulo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    textAlign: "center",
-  },
-
-  input: {
-    backgroundColor: '#f2f2f2',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10,
-  },
-
-  modalBotoes: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  tagGestao: {
     marginTop: 10,
-  },
-
-  btn: {
-    backgroundColor: '#2563ff',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
+    color: '#2563ff',
+    fontStyle: 'italic',
+    fontSize: 13,
   },
 });
